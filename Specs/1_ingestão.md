@@ -1,3 +1,5 @@
+##SPEC
+
 CONTEXTO
 Estou construindo um pipeline de dados em Python sobre o dataset público de Expectativa de vida versus gastos com saúde do site https://www.timestored.com/data/sample/healthexp.csv. Trabalho com spec-driven development:
 a spec abaixo é a fonte da verdade e o código é consequência dela. Não
