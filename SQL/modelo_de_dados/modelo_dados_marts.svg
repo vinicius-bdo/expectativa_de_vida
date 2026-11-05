@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="960" viewBox="0 0 1440 960" role="img" aria-labelledby="title description">
+  <title id="title">Modelo dimensional Star Schema da camada marts</title>
+  <desc id="description">Diagrama com as dimensões calendário e país relacionadas à tabela fato gastos por chaves estrangeiras.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#eef2ff"/>
+    </linearGradient>
+    <linearGradient id="factHeader" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4338ca"/>
+      <stop offset="1" stop-color="#6366f1"/>
+    </linearGradient>
+    <filter id="shadow" x="-15%" y="-15%" width="130%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#172554" flood-opacity=".10"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#64748b"/>
+    </marker>
+    <style>
+      text { font-family: "Segoe UI", Arial, sans-serif; fill: #172033; }
+      .title { font-size: 34px; font-weight: 700; letter-spacing: -.5px; }
+      .subtitle { font-size: 16px; fill: #64748b; }
+      .card { fill: #fff; stroke: #dbe3ef; stroke-width: 1.5; }
+      .dim-header { fill: #0f766e; }
+      .table-title { font-size: 21px; font-weight: 700; fill: #fff; }
+      .table-schema { font-size: 13px; font-weight: 600; fill: #cbd5e1; }
+      .column { font-size: 16px; }
+      .type { font-size: 14px; fill: #64748b; }
+      .key { font-size: 11px; font-weight: 700; letter-spacing: .4px; }
+      .relation { font-size: 13px; font-weight: 700; fill: #475569; }
+      .note { font-size: 15px; fill: #475569; }
+      .note-strong { font-size: 15px; font-weight: 700; fill: #334155; }
+    </style>
+  </defs>
+
+  <rect width="1440" height="960" rx="28" fill="url(#background)"/>
+  <circle cx="1320" cy="90" r="115" fill="#c7d2fe" opacity=".22"/>
+  <circle cx="72" cy="890" r="150" fill="#99f6e4" opacity=".18"/>
+
+  <text x="84" y="88" class="title">Modelo de dados · marts</text>
+  <text x="84" y="120" class="subtitle">Star Schema — gastos com saúde e expectativa de vida por país e ano</text>
+  <rect x="1195" y="68" width="160" height="36" rx="18" fill="#e0e7ff"/>
+  <text x="1275" y="91" text-anchor="middle" font-size="13" font-weight="700" fill="#4338ca">CAMADA ANALÍTICA</text>
+
+  <!-- Relationships are behind the tables. -->
+  <path d="M365 470 C390 520, 510 565, 610 630" fill="none" stroke="#64748b" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <path d="M1075 470 C1050 520, 930 565, 830 630" fill="none" stroke="#64748b" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="432" y="523" width="92" height="28" rx="14" fill="#f1f5f9" stroke="#cbd5e1"/>
+  <text x="478" y="542" text-anchor="middle" class="relation">1 : N</text>
+  <rect x="916" y="523" width="92" height="28" rx="14" fill="#f1f5f9" stroke="#cbd5e1"/>
+  <text x="962" y="542" text-anchor="middle" class="relation">1 : N</text>
+
+  <!-- Calendar dimension -->
+  <g filter="url(#shadow)">
+    <rect x="110" y="220" width="510" height="250" rx="18" class="card"/>
+    <path d="M128 220 H602 Q620 220 620 238 V278 H110 V238 Q110 220 128 220Z" class="dim-header"/>
+  </g>
+  <text x="138" y="254" class="table-title">d_calendario</text>
+  <text x="588" y="253" text-anchor="end" class="table-schema">DIMENSÃO</text>
+  <line x1="134" y1="300" x2="596" y2="300" stroke="#e2e8f0"/>
+  <rect x="526" y="315" width="58" height="22" rx="11" fill="#ccfbf1"/>
+  <text x="555" y="330" text-anchor="middle" class="key" fill="#0f766e">PK</text>
+  <text x="140" y="332" class="column">id_calendario</text>
+  <text x="390" y="332" class="type">INTEGER</text>
+  <line x1="134" y1="350" x2="596" y2="350" stroke="#f1f5f9"/>
+  <text x="140" y="383" class="column">ano</text>
+  <text x="390" y="383" class="type">INTEGER · único</text>
+  <text x="140" y="438" font-size="13" fill="#64748b">Uma linha para cada ano disponível.</text>
+
+  <!-- Country dimension -->
+  <g filter="url(#shadow)">
+    <rect x="820" y="220" width="510" height="250" rx="18" class="card"/>
+    <path d="M838 220 H1312 Q1330 220 1330 238 V278 H820 V238 Q820 220 838 220Z" class="dim-header"/>
+  </g>
+  <text x="848" y="254" class="table-title">d_pais</text>
+  <text x="1298" y="253" text-anchor="end" class="table-schema">DIMENSÃO</text>
+  <line x1="844" y1="300" x2="1306" y2="300" stroke="#e2e8f0"/>
+  <rect x="1236" y="315" width="58" height="22" rx="11" fill="#ccfbf1"/>
+  <text x="1265" y="330" text-anchor="middle" class="key" fill="#0f766e">PK</text>
+  <text x="850" y="332" class="column">id_pais</text>
+  <text x="1080" y="332" class="type">INTEGER</text>
+  <line x1="844" y1="350" x2="1306" y2="350" stroke="#f1f5f9"/>
+  <text x="850" y="383" class="column">pais</text>
+  <text x="1080" y="383" class="type">VARCHAR</text>
+  <text x="850" y="438" font-size="13" fill="#64748b">Identificador preservado da camada refined.</text>
+
+  <!-- Fact table -->
+  <g filter="url(#shadow)">
+    <rect x="470" y="620" width="500" height="270" rx="18" class="card"/>
+    <path d="M488 620 H952 Q970 620 970 638 V680 H470 V638 Q470 620 488 620Z" fill="url(#factHeader)"/>
+  </g>
+  <text x="498" y="655" class="table-title">fato_gastos</text>
+  <text x="938" y="654" text-anchor="end" class="table-schema">TABELA FATO</text>
+  <line x1="494" y1="702" x2="946" y2="702" stroke="#e2e8f0"/>
+
+  <rect x="848" y="714" width="72" height="21" rx="10" fill="#e0e7ff"/>
+  <text x="884" y="729" text-anchor="middle" class="key" fill="#4338ca">FK · PK*</text>
+  <text x="500" y="733" class="column">id_calendario</text>
+  <text x="700" y="733" class="type">INTEGER</text>
+  <line x1="494" y1="746" x2="946" y2="746" stroke="#f1f5f9"/>
+
+  <rect x="848" y="756" width="72" height="21" rx="10" fill="#e0e7ff"/>
+  <text x="884" y="771" text-anchor="middle" class="key" fill="#4338ca">FK · PK*</text>
+  <text x="500" y="775" class="column">id_pais</text>
+  <text x="700" y="775" class="type">INTEGER</text>
+  <line x1="494" y1="788" x2="946" y2="788" stroke="#f1f5f9"/>
+
+  <text x="500" y="817" class="column">gasto_usd</text>
+  <text x="700" y="817" class="type">DECIMAL(10,2)</text>
+  <line x1="494" y1="830" x2="946" y2="830" stroke="#f1f5f9"/>
+  <text x="500" y="859" class="column">expectativa_de_vida</text>
+  <text x="700" y="859" class="type">DECIMAL(3,1)</text>
+
+  <rect x="418" y="911" width="604" height="32" rx="16" fill="#e2e8f0"/>
+  <text x="720" y="932" text-anchor="middle" class="note">
+    * Chave primária composta: (id_calendario, id_pais) · Granularidade: país × ano
+  </text>
+</svg>
