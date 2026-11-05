@@ -6,8 +6,15 @@ com saúde e expectativa de vida em um dashboard interativo.
 O projeto utiliza o dataset [Health Expenditure and Life Expectancy](https://www.timestored.com/data/sample/healthexp.csv), com registros por país e ano.
 
 ## Dashboard
+Parte 01:
+<img width="1906" height="879" alt="image" src="https://github.com/user-attachments/assets/d0649de0-bf56-4b95-9dca-7205635f310d" />
 
-![Captura do dashboard](./dashboard.png)
+Parte 02:
+<img width="1899" height="824" alt="image" src="https://github.com/user-attachments/assets/40a58885-1fe7-4af9-9d32-ba703288fac5" />
+
+Parte 03:
+<img width="1903" height="479" alt="image" src="https://github.com/user-attachments/assets/8801cb4a-c066-48d6-9105-924a74609242" />
+
 
 O dashboard, desenvolvido com Streamlit, apresenta:
 
