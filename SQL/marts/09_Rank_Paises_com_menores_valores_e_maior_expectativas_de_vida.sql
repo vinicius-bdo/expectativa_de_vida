@@ -5,7 +5,11 @@ WITH medias AS (
         AVG(f.gasto_usd) AS gasto_medio_usd,
         AVG(f.expectativa_de_vida) AS expectativa_media_anos
     FROM marts.fato_gastos AS f
+    JOIN marts.d_calendario AS d USING (id_calendario)
     JOIN marts.d_pais AS p USING (id_pais)
+    WHERE d.ano BETWEEN ? AND ?
+      AND (? IS NULL OR list_contains(CAST(? AS INTEGER[]), d.ano))
+      AND (? IS NULL OR list_contains(CAST(? AS VARCHAR[]), p.pais))
     GROUP BY p.id_pais, p.pais
 )
 SELECT
