@@ -31,15 +31,15 @@ def carregar_dados(ano_inicio, ano_fim, pais, anos_selecionados=None):
 
 
 def parar_com_erro(mensagem):
-    st.error(f"{mensagem} Execute `uv run python -m pipeline.marts` para recriar os marts.")
+    st.error(
+        f"{mensagem} Execute `uv run python -m pipeline.marts` para recriar os marts."
+    )
     st.stop()
 
 
 def recarregar_dados():
     carregar_dados.clear()
-    st.session_state["geracao_filtros"] = st.session_state.get(
-        "geracao_filtros", 0
-    ) + 1
+    st.session_state["geracao_filtros"] = st.session_state.get("geracao_filtros", 0) + 1
 
 
 def pontos_selecionados(chave):
@@ -155,9 +155,7 @@ paises_filtrados = (
 )
 anos_selecionados = list(
     dict.fromkeys(
-        ponto["x"]
-        for ponto in pontos_selecionados(chave_tempo)
-        if "x" in ponto
+        ponto["x"] for ponto in pontos_selecionados(chave_tempo) if "x" in ponto
     )
 )
 try:
@@ -215,9 +213,7 @@ with linha_direita:
         unsafe_allow_html=True,
     )
     st.plotly_chart(
-        grafico_expectativa_pais(
-            dados["08_Paises_com_maiores_expectativas_de_vida"]
-        ),
+        grafico_expectativa_pais(dados["08_Paises_com_maiores_expectativas_de_vida"]),
         width="stretch",
         key=chave_expectativa,
         on_select="rerun",
@@ -239,9 +235,7 @@ ranking = dados[
     }
 )
 ranking["Gasto médio (USD)"] = ranking["Gasto médio (USD)"].map(DOLAR)
-ranking["Expectativa média (anos)"] = ranking[
-    "Expectativa média (anos)"
-].map(MEDIAS)
+ranking["Expectativa média (anos)"] = ranking["Expectativa média (anos)"].map(MEDIAS)
 ranking["Posição"] = ranking["Posição"].map(INTERGER)
 st.dataframe(ranking, width="stretch", hide_index=True)
 
@@ -250,9 +244,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 st.plotly_chart(
-    grafico_linha_tempo(
-        dados["10_Linha_do_tempo_com_gastos_e_media_da_idade"]
-    ),
+    grafico_linha_tempo(dados["10_Linha_do_tempo_com_gastos_e_media_da_idade"]),
     width="stretch",
     key=chave_tempo,
     on_select="rerun",

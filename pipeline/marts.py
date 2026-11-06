@@ -40,7 +40,9 @@ def _tabela_existe(con, schema, tabela):
 
 
 def _colunas_tipo(con, tabela):
-    return {nome: tipo for nome, tipo, *_ in con.execute(f"DESCRIBE {tabela}").fetchall()}
+    return {
+        nome: tipo for nome, tipo, *_ in con.execute(f"DESCRIBE {tabela}").fetchall()
+    }
 
 
 def _validar_tabelas_refined(con):
@@ -298,10 +300,12 @@ def _imprimir_resultados(con):
     paises = _contagem(con, "SELECT count(*) FROM marts.d_pais")
     fato = _contagem(con, "SELECT count(*) FROM marts.fato_gastos")
     duplicatas_calendario = _contagem(
-        con, "SELECT count(*) FROM (SELECT ano FROM marts.d_calendario GROUP BY ano HAVING count(*) > 1)"
+        con,
+        "SELECT count(*) FROM (SELECT ano FROM marts.d_calendario GROUP BY ano HAVING count(*) > 1)",
     )
     duplicatas_paises = _contagem(
-        con, "SELECT count(*) FROM (SELECT pais FROM marts.d_pais GROUP BY pais HAVING count(*) > 1)"
+        con,
+        "SELECT count(*) FROM (SELECT pais FROM marts.d_pais GROUP BY pais HAVING count(*) > 1)",
     )
     duplicatas_removidas = _remover_duplicatas_fato(con)
 
@@ -345,12 +349,18 @@ def _imprimir_resultados(con):
         "    nulos mantidos: "
         + ", ".join(
             f"{coluna} {_formatar_numero(quantidade)}"
-            for coluna, quantidade in zip(("gasto_usd", "expectativa_de_vida"), nulos_fato)
+            for coluna, quantidade in zip(
+                ("gasto_usd", "expectativa_de_vida"), nulos_fato
+            )
         )
     )
 
-    print(f"Anos distintos: {_formatar_numero(_contagem(con, 'SELECT count(DISTINCT ano) FROM refined.tb_gastos'))}")
-    print(f"Países distintos: {_formatar_numero(_contagem(con, 'SELECT count(DISTINCT id_pais) FROM refined.tb_paises'))}")
+    print(
+        f"Anos distintos: {_formatar_numero(_contagem(con, 'SELECT count(DISTINCT ano) FROM refined.tb_gastos'))}"
+    )
+    print(
+        f"Países distintos: {_formatar_numero(_contagem(con, 'SELECT count(DISTINCT id_pais) FROM refined.tb_paises'))}"
+    )
     print(f"Registros na tabela fato: {_formatar_numero(fato)}")
     print(f"Duplicatas removidas: {_formatar_numero(_remover_duplicatas_fato(con))}")
     print(f"Registros rejeitados por inconsistência: {_formatar_numero(0)}")

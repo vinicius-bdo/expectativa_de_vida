@@ -73,6 +73,21 @@ uv run streamlit run app.py
 
 O Streamlit exibirá no terminal o endereço local do dashboard.
 
+## Testes e cobertura
+
+Execute os testes automatizados e gere um relatório de cobertura do pipeline:
+
+```bash
+uv run task test
+```
+
+O relatório mostra a cobertura de cada módulo em `pipeline/`. Para conferir o
+estilo do código, execute:
+
+```bash
+uv run task lint
+```
+
 ## Estrutura do projeto
 
 ```text
@@ -80,6 +95,7 @@ O Streamlit exibirá no terminal o endereço local do dashboard.
 ├── app.py                 # Aplicação Streamlit
 ├── painel.py              # Leitura dos dados, formatação e gráficos
 ├── dashboard.png          # Captura do dashboard
+├── tests/                 # Testes unitários e do pipeline
 ├── pipeline/
 │   ├── db.py              # Conexão e funções comuns do DuckDB
 │   ├── ingestao.py        # Carregamento da camada raw

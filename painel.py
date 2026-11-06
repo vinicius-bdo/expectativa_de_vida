@@ -131,9 +131,7 @@ def ler(pasta_sql=PASTA_SQL, ano_inicio=1970, ano_fim=2020, pais=None, anos=None
         dados = {}
         for nome in ARQUIVOS_SQL:
             consulta = (pasta_sql / nome).read_text(encoding="utf-8")
-            dados[Path(nome).stem] = conexao.execute(
-                consulta, parametros
-            ).fetchdf()
+            dados[Path(nome).stem] = conexao.execute(consulta, parametros).fetchdf()
         return dados
     finally:
         conexao.close()
@@ -150,7 +148,9 @@ def grafico_gastos_pais(df):
         color_discrete_sequence=[COR_GRAFICO],
         labels={"gasto_usd": "Gastos (USD)", "pais": "País"},
     )
-    figura.update_layout(showlegend=False, xaxis_tickprefix="USD$ ", uniformtext_minsize=8)
+    figura.update_layout(
+        showlegend=False, xaxis_tickprefix="USD$ ", uniformtext_minsize=8
+    )
     figura.update_xaxes(showticklabels=False)
     figura.update_yaxes(title_text="")
     figura.update_traces(
